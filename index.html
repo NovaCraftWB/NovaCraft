@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html lang="ro">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NovaCraft</title>
-</head>
+<html>
 <body>
-<div id="app"></div>
+<textarea id="input" style="width:100%;height:300px;"></textarea><br>
+<button onclick="encode()">Encode</button>
+<textarea id="output" style="width:100%;height:300px;"></textarea>
 
 <script>
-// Functie XOR pentru criptare/decriptare
-function xor(str, key){
-    let res="";
-    for(let i=0;i<str.length;i++){
-        res+=String.fromCharCode(str.charCodeAt(i)^key);
-    }
-    return res;
+function xor(str, key) {
+  let res = "";
+  for (let i = 0; i < str.length; i++) {
+    res += String.fromCharCode(str.charCodeAt(i) ^ key);
+  }
+  return res;
 }
 
-// Cheia XOR
-let key = 123;
-
-// HTML + CSS criptat Base64
-let encrypted = "PHRleHQgdG8gcHV0IGhpZXJlIGJhc2U2NCBzdHJpbmc="; // Aici vei pune Base64-ul tău real
-
-// Decodează Base64
-let decoded = atob(encrypted);
-
-// Aplică XOR
-let html = xor(decoded,key);
-
-// Injectează în div
-document.getElementById("app").innerHTML = html;
+function encode() {
+  let text = document.getElementById("input").value;
+  let xored = xor(text, 123);
+  let b64 = btoa(xored);
+  document.getElementById("output").value = b64;
+}
 </script>
 </body>
 </html>
