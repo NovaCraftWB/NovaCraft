@@ -1,10 +1,14 @@
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <title>NovaCraft</title>
 </head>
 <body>
+<div id="app"></div>
+
 <script>
-function xorEncrypt(str, key) {
+function xorDecrypt(str, key){
   let res="";
   for(let i=0;i<str.length;i++){
     res += String.fromCharCode(str.charCodeAt(i)^key);
@@ -12,16 +16,17 @@ function xorEncrypt(str, key) {
   return res;
 }
 
-let encrypted="Gk5P..."; 
-
+// HTML-ul tău criptat (Base64 după XOR)
+let encrypted="HUxX..."; // aici pune string-ul tău criptat
 
 let key=123;
 
+// Decodează Base64 și apoi XOR
 let decoded=atob(encrypted);
-let finalHTML=xorEncrypt(decoded,key);
+let html=xorDecrypt(decoded,key);
 
-// injectează în pagină
-document.write(finalHTML);
+// Inserează în div, nu înlocuiește tot body-ul
+document.getElementById("app").innerHTML = html;
 </script>
 </body>
-
+</html>
